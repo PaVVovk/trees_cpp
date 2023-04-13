@@ -267,13 +267,31 @@ void del(Node* deleted)
 
     if ((deleted->color == black) && (deleted->left == nullptr) && (deleted->right == nullptr))
     {
-    //ахахахахахахахахахахахахахахах(((
-    //помогите, я рыдаю
-    //этот мир жесток и полон страданий...
-    //я не спал 1 ночь и не ел 1 день
-    //можно я просто посплю... Христа ради
+        if (deleted->parent == nullptr){
+            return;
+        }
+        if (bro(deleted)->color == red){
+            deleted->color = red;
+            deleted->parent->color = black;
+            if (is_left(deleted)){
+                rotate_left(deleted->parent);
+            } else {
+                rotate_right(deleted);
+            }
+        } else if ((deleted->parent->color == black) &&
+	        (bro(deleted)->color == black) &&
+	        (bro(deleted)->left->color == black) &&
+	        (bro(deleted)->right->color == black)){
+                bro(deleted)->color = red;
+        } else if ((deleted->parent->color == red) &&
+	        (bro(deleted)->color == black) &&
+	        (bro(deleted)->left->color == black) &&
+	        (bro(deleted)->right->color == black)){
+                bro(deleted)->color = red;
+                deleted->parent->color = black;
+        } else if(){
             
-        
+        }
         delete deleted;
         return;
     }
