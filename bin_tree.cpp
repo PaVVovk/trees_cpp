@@ -44,6 +44,13 @@ Node* uncle(Node* node){
     return nullptr;
 }
 
+bool is_left(Node* child){
+    if (child->parent == nullptr){
+        return false;
+    }
+    return (child->parent->left == child);
+}
+
 Node* bro(Node* node){
     if ((node == nullptr) or (node->parent == nullptr)){
         return nullptr;
@@ -52,13 +59,6 @@ Node* bro(Node* node){
         return node->parent->right;
     }
     return node->parent->left;
-}
-
-bool is_left(Node* child){
-    if (child->parent == nullptr){
-        return false;
-    }
-    return (child->parent->left == child);
 }
 
 void rotate_left(Node* n){
