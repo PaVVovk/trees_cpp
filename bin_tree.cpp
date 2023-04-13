@@ -289,8 +289,30 @@ void del(Node* deleted)
 	        (bro(deleted)->right->color == black)){
                 bro(deleted)->color = red;
                 deleted->parent->color = black;
-        } else if(){
-            
+        } else if (bro(deleted)->color == black){
+            if ((is_left(deleted)) && (bro(deleted)->right->color == black)
+                && (bro(deleted)->left->color == red)){
+                    bro(deleted)->color = red;
+                    bro(deleted)->left->color = black;
+                    rotate_right(bro(deleted));
+            } 
+            else if ((!is_left(deleted)) && (bro(deleted)->left->color == black)
+                && (bro(deleted)->right->color == red)){
+                    bro(deleted)->color = red;
+                    bro(deleted)->right->color = black;
+                    rotate_left(bro(deleted));
+            }
+        } else {
+            bro(deleted)->color = deleted->parent->color;
+            deleted->parent->color = black;
+
+            if (is_left(deleted)) {
+                bro(deleted)->right->color = black;
+                rotate_left(deleted->parent);
+            } else {
+                bro(deleted)->left->color = black;
+                rotate_right(deleted->parent);
+            }
         }
         delete deleted;
         return;
