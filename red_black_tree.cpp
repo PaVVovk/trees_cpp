@@ -201,8 +201,8 @@ void black_conditions(Node* deleted, Node*& head){
     }
 
     if (bro(deleted)->color == red){
-        deleted->color = red;
-        deleted->parent->color = black;
+        bro(deleted)->color = black;
+        deleted->parent->color = red;
         if (is_left(deleted)){
             rotate_left(deleted->parent, head);
         } else {
